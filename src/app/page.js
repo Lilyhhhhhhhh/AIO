@@ -12,6 +12,15 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // 检查用户是否已查看过欢迎页
+    const hasVisitedWelcomePage = localStorage.getItem('hasVisitedWelcomePage');
+    
+    // 如果用户没有查看过欢迎页，则重定向到欢迎页
+    if (!hasVisitedWelcomePage && typeof window !== 'undefined') {
+      router.push('/welcome');
+      return;
+    }
+    
     // 检查用户是否已登录
     const checkUser = async () => {
       try {
